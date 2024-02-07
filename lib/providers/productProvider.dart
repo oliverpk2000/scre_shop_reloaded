@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../domain/product.dart';
 
-class Products with ChangeNotifier {
+class ProductProvider with ChangeNotifier {
   List<Product> _items = [
     Product(
       id: 1,
@@ -35,6 +35,30 @@ class Products with ChangeNotifier {
       price: 29.99,
       imageUrl:
       'http://store.tobinio.at/file/opk/go_plushie.jpg',
+    ),
+    Product(
+      id: 5,
+      title: 'python logo plushie',
+      description: 'packaging this plushie is always a pain',
+      price: 25.99,
+      imageUrl:
+      'http://store.tobinio.at/file/opk/python_plushie.jpg',
+    ),
+    Product(
+      id: 6,
+      title: 'php mascot plushie',
+      description: 'this one is making quite the comeback',
+      price: 18.99,
+      imageUrl:
+      'http://store.tobinio.at/file/opk/php_plushie.jpg',
+    ),
+    Product(
+      id: 7,
+      title: 'java mascot plushie',
+      description: 'ships evereywhere',
+      price: 24.99,
+      imageUrl:
+      'http://store.tobinio.at/file/opk/java_plushie.jpg',
     ),
   ];
 
