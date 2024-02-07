@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
-class Cart with ChangeNotifier {
+class CartItem with ChangeNotifier {
   final String id;
   final String title;
   final int quantity;
   final double price;
 
-  Cart({
+  CartItem({
     required this.id,
     required this.title,
     required this.quantity,

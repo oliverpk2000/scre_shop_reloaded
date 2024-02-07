@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../domain/product.dart';
 
 class ProductProvider with ChangeNotifier {
-  List<Product> _items = [
+  List<Product> products = [
     Product(
       id: 1,
       title: 'linux mascot plushie',
@@ -62,25 +62,26 @@ class ProductProvider with ChangeNotifier {
     ),
   ];
 
-  var isFavoriteTapped = false;
+  var onlyFavourites = false;
 
   List<Product> get items {
-    if (isFavoriteTapped)
-      return _items.where((product) => product.isFavourite).toList();
-    return [..._items];
+    if (onlyFavourites) {
+      return products.where((product) => product.isFavourite).toList();
+    }
+    return products;
   }
 
   Product findById(int productId) {
-    return _items.firstWhere((p) => p.id == productId);
+    return products.firstWhere((p) => p.id == productId);
   }
 
   void showFavorite() {
-    isFavoriteTapped = true;
+    onlyFavourites = true;
     notifyListeners();
   }
 
   void showAll() {
-    isFavoriteTapped = false;
+    onlyFavourites = false;
     notifyListeners();
   }
 }

@@ -1,12 +1,12 @@
-import 'cart.dart';
+import 'cartItem.dart';
 
-class Order{
+class OrderItem{
   final String id;
   final double amount;
-  final List<Cart> orderedProducts;
+  final List<CartItem> orderedProducts;
   final DateTime datetime;
 
-  Order({
+  OrderItem({
     required this.id,
     required this.amount,
     required this.orderedProducts,
