@@ -84,4 +84,13 @@ class ProductProvider with ChangeNotifier {
     onlyFavourites = false;
     notifyListeners();
   }
+
+  void toggleFavouriteById(int productId){
+    products.firstWhere((p) => p.id == productId).toggleFavorite();
+  }
+
+  void deleteProductById(int productId){
+    items.removeAt(productId);
+    notifyListeners();
+  }
 }
