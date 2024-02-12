@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 
-class productTile extends StatefulWidget {
-  const productTile({super.key});
+import '../domain/product.dart';
+
+class ProductTile extends StatefulWidget {
+  final Product product;
+
+  const ProductTile({super.key,  required this.product});
 
   @override
-  State<productTile> createState() => _productTileState();
+  State<ProductTile> createState() => _ProductTileState();
 }
 
-class _productTileState extends State<productTile> {
+class _ProductTileState extends State<ProductTile> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return GridTile(
+      child: ,
+    );
   }
 }
