@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scre_shop_reloaded/domain/product.dart';
 
-class DetailedProductPage extends StatefulWidget {
-  final Product product;
+import '../providers/productProvider.dart';
 
-  const DetailedProductPage({super.key, required this.product});
+class DetailedProductPage extends StatefulWidget {
+
+  const DetailedProductPage({super.key});
 
   @override
   State<DetailedProductPage> createState() => _DetailedProductPageState();
@@ -13,17 +15,19 @@ class DetailedProductPage extends StatefulWidget {
 class _DetailedProductPageState extends State<DetailedProductPage> {
   @override
   Widget build(BuildContext context) {
+    ProductProvider productProvider = Provider.of<ProductProvider>(context);
+    Product product = productProvider.items[productProvider.getPointer()];
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.product.title),
+        title: Text(product.title),
         backgroundColor: Colors.lightBlue,
       ),
       body: Column(
         children: [
-          Text(widget.product.title),
-          Image.network(widget.product.imageUrl),
-          Text(widget.product.description),
-          Text("${widget.product.price}"),
+          Text(product.title),
+          Image.network(product.imageUrl),
+          Text(product.description),
+          Text("${product.price}"),
 
         ],
       ),

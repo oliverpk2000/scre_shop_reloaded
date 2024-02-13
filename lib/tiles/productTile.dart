@@ -19,26 +19,34 @@ class _ProductTileState extends State<ProductTile> {
   @override
   Widget build(BuildContext context) {
     productProvider = Provider.of<ProductProvider>(context);
-    return GridTile(
-      header: GridTileBar(
-        title: Text(widget.product.title),
-        backgroundColor: Colors.lightBlue,
-      ),
-      child: Image.network(widget.product.imageUrl),
-      footer: Row(
-        children: [
-          Text("${widget.product.price}"),
-          IconButton(
-              onPressed: () {
-                setState(() {
-                  productProvider.toggleFavouriteById(widget.product.id);
-                });
-              },
-              icon: Icon((widget.product.isFavourite)
-                  ? (Icons.favorite_outlined)
-                  : (Icons.favorite_outline))),
-          Text("TODO: cart btn"),
-        ],
+    return GestureDetector(
+      onTap: (){
+        productProvider.setPointer(widget.product.id - 1);
+        Navigator.pushNamed(context, "/detail");
+      },
+      child: GridTile(
+        header: GridTileBar(
+          title: Text(widget.product.title),
+          backgroundColor: Colors.lightBlue,
+        ),
+        footer: Row(
+          children: [
+            Text("${widget.product.price}"),
+            IconButton(
+                onPressed: () {
+                  setState(() {
+                    productProvider.toggleFavouriteById(widget.product.id);
+                  });
+                },
+                icon: Icon((widget.product.isFavourite)
+                    ? (Icons.favorite_outlined)
+                    : (Icons.favorite_outline))),
+            IconButton(onPressed: (){
+
+            }, icon: const Icon(Icons.shopping_cart)),
+          ],
+        ),
+        child: Image.network(widget.product.imageUrl),
       ),
     );
   }

@@ -55,12 +55,16 @@ class ProductProvider with ChangeNotifier {
     Product(
       id: 7,
       title: 'java mascot plushie',
-      description: 'ships evereywhere',
+      description: 'ships everywhere',
       price: 24.99,
       imageUrl:
       'http://store.tobinio.at/file/opk/java_plushie.jpg',
     ),
   ];
+
+  int pointer = -1;
+
+  int lastId = 7;
 
   var onlyFavourites = false;
 
@@ -92,5 +96,22 @@ class ProductProvider with ChangeNotifier {
   void deleteProductById(int productId){
     items.removeAt(productId);
     notifyListeners();
+  }
+
+  int getLastId(){
+    return lastId;
+  }
+
+  void addProduct(Product newProduct){
+    items.add(newProduct);
+    lastId++;
+  }
+
+  void setPointer(int p){
+    pointer = p;
+  }
+
+  int getPointer(){
+    return pointer;
   }
 }
