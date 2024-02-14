@@ -21,7 +21,7 @@ class _ProductTileState extends State<ProductTile> {
   Widget build(BuildContext context) {
     productProvider = Provider.of<ProductProvider>(context);
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         productProvider.setPointer(widget.product.id);
         Navigator.pushNamed(context, "/detail");
       },
@@ -38,13 +38,26 @@ class _ProductTileState extends State<ProductTile> {
                   setState(() {
                     productProvider.toggleFavouriteById(widget.product.id);
                   });
+                  SnackBar snackBar = SnackBar(
+                      content: (widget.product.isFavourite)
+                          ? (Text(
+                              "added ${widget.product.title} to favourites"))
+                          : (Text(
+                              "removed ${widget.product.title} from favourites")));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 },
                 icon: Icon((widget.product.isFavourite)
                     ? (Icons.favorite_outlined)
                     : (Icons.favorite_outline))),
-            IconButton(onPressed: (){
-              productProvider.incrementCartItem(CartItem(product: widget.product, amount: 1));
-            }, icon: const Icon(Icons.shopping_cart)),
+            IconButton(
+                onPressed: () {
+                  productProvider.incrementCartItem(
+                      CartItem(product: widget.product, amount: 1));
+                  SnackBar snackBar = SnackBar(
+                      content: Text("added ${widget.product.title} to cart"));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                },
+                icon: const Icon(Icons.shopping_cart)),
           ],
         ),
         child: Image.network(widget.product.imageUrl),

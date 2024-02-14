@@ -34,8 +34,13 @@ class _CartPageState extends State<CartPage> {
                           datetime: DateTime.now(),
                           orderNumber: productProvider.orderNumber));
                       productProvider.wipeCart();
+                      SnackBar snackBar = SnackBar(
+                          content: Text("placed order"));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     } else {
-                      print("nothing to add");
+                      SnackBar snackBar = SnackBar(
+                          content: Text("cart is empty"));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }
                   });
                 },

@@ -24,11 +24,9 @@ class _DetailedProductPageState extends State<DetailedProductPage> {
       ),
       body: Column(
         children: [
-          Text(product.title),
           Image.network(product.imageUrl),
           Text(product.description),
-          Text("${product.price}"),
-
+          Text("${product.price}€"),
         ],
       ),
     );

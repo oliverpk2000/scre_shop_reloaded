@@ -58,6 +58,9 @@ class _ProductManagementPageState extends State<ProductManagementPage> {
                             setState(() {
                               productProvider.deleteProductById(productProvider.items[index].id);
                             });
+                            SnackBar snackBar = const SnackBar(
+                                content: Text("deleted product"));
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           },
                           icon: const Icon(Icons.delete)),
                     ]),

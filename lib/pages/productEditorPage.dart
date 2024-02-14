@@ -41,11 +41,13 @@ class _ProductEditorPageState extends State<ProductEditorPage> {
                     imageUrl: imageUrl);
                 if(productProvider.getPointer() < 0){
                   productProvider.addProduct(newProduct);
+                  SnackBar snackBar = SnackBar(
+                      content: Text("added new product"));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 }else{
-                  print(productProvider.getPointer());
-                  print("here");
-                  print(id);
-                  print("$id, $title $description $price $imageUrl");
+                  SnackBar snackBar = const SnackBar(
+                      content: Text("edits saved"));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   productProvider.changeProduct(newProduct);
                 }
                 Navigator.pop(context);
