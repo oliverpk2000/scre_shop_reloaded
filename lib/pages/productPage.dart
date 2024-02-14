@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../domain/product.dart';
 import '../providers/productProvider.dart';
+import '../tiles/drawer.dart';
 import '../tiles/productTile.dart';
 
 class ProductPage extends StatefulWidget {
@@ -13,35 +14,40 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
+  late bool favourites = false;
+
   @override
   Widget build(BuildContext context) {
     ProductProvider products = Provider.of<ProductProvider>(context);
     return Scaffold(
+      drawer: const Drawer(child: CustomDrawer()),
       appBar: AppBar(
         title: const Text("Web-shop"),
         backgroundColor: Colors.lightBlue,
         actions: [
-          IconButton(onPressed: (){
-            Navigator.pushNamed(context, "/management");
-          }, icon: const Icon(Icons.edit)),
-          IconButton(onPressed: (){
-            Navigator.pushNamed(context, "/cart");
-          }, icon: const Icon(Icons.shopping_cart))
+          IconButton(
+              onPressed: () {
+                if(favourites){
+                  products.showAll();
+                }else{
+                  products.showFavorite();
+                }
+                favourites = !favourites;
+              },
+              icon: (favourites) ? (const Icon(Icons.favorite)) : (Icon(Icons.favorite_outline))),
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/cart");
+              },
+              icon: const Icon(Icons.shopping_cart))
         ],
       ),
       body: Column(
         children: [
-          const Text("products"),
-          TextButton(onPressed: () {
-            products.showFavorite();
-          }, child: const Text("show favourites")),
-          TextButton(onPressed: () {
-            products.showAll();
-          }, child: const Text("show all")),
           Expanded(
             child: GridView.builder(
-              gridDelegate:
-                  const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2),
               itemCount: products.items.length,
               itemBuilder: (context, index) {
                 return ProductTile(product: products.items[index]);

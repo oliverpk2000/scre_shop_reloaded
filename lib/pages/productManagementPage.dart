@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scre_shop_reloaded/providers/productProvider.dart';
+import 'package:scre_shop_reloaded/tiles/drawer.dart';
 
 class ProductManagementPage extends StatefulWidget {
   const ProductManagementPage({super.key});
@@ -14,7 +15,9 @@ class _ProductManagementPageState extends State<ProductManagementPage> {
   Widget build(BuildContext context) {
     ProductProvider productProvider = Provider.of<ProductProvider>(context);
     return Scaffold(
+      drawer: const Drawer(child: CustomDrawer()),
       appBar: AppBar(
+        backgroundColor: Colors.lightBlue,
         title: const Text("Product Management"),
         actions: [
           IconButton(
@@ -53,7 +56,7 @@ class _ProductManagementPageState extends State<ProductManagementPage> {
                       IconButton(
                           onPressed: () {
                             setState(() {
-                              productProvider.deleteProductById(index);
+                              productProvider.deleteProductById(productProvider.items[index].id);
                             });
                           },
                           icon: const Icon(Icons.delete)),

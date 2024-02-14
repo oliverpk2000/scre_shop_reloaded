@@ -32,7 +32,7 @@ class _ProductTileState extends State<ProductTile> {
         ),
         footer: Row(
           children: [
-            Text("${widget.product.price}"),
+            Text("€${widget.product.price}"),
             IconButton(
                 onPressed: () {
                   setState(() {
