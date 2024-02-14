@@ -21,7 +21,7 @@ class _ProductTileState extends State<ProductTile> {
     productProvider = Provider.of<ProductProvider>(context);
     return GestureDetector(
       onTap: (){
-        productProvider.setPointer(widget.product.id - 1);
+        productProvider.setPointer(widget.product.id);
         Navigator.pushNamed(context, "/detail");
       },
       child: GridTile(

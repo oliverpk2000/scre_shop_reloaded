@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scre_shop_reloaded/pages/detailedProductPage.dart';
+import 'package:scre_shop_reloaded/pages/productEditorPage.dart';
 import 'package:scre_shop_reloaded/pages/productManagementPage.dart';
 import 'package:scre_shop_reloaded/pages/productPage.dart';
 import 'package:scre_shop_reloaded/providers/cartProvider.dart';
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
       routes: {
         "/products": (context) => const ProductPage(),
         "/management": (context) => const ProductManagementPage(),
-        "/detail": (context) => const DetailedProductPage()
+        "/detail": (context) => const DetailedProductPage(),
+        "/edit":(context) => const ProductEditorPage(),
       },
     );
   }

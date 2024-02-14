@@ -16,7 +16,7 @@ class _DetailedProductPageState extends State<DetailedProductPage> {
   @override
   Widget build(BuildContext context) {
     ProductProvider productProvider = Provider.of<ProductProvider>(context);
-    Product product = productProvider.items[productProvider.getPointer()];
+    Product product = productProvider.items.firstWhere((product) => product.id == productProvider.getPointer());
     return Scaffold(
       appBar: AppBar(
         title: Text(product.title),

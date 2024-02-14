@@ -16,6 +16,14 @@ class _ProductManagementPageState extends State<ProductManagementPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Product Management"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                productProvider.setPointer(-1);
+                Navigator.pushNamed(context, "/edit");
+              },
+              icon: const Icon(Icons.add_circle_outline))
+        ],
       ),
       body: Column(
         children: [
@@ -29,13 +37,28 @@ class _ProductManagementPageState extends State<ProductManagementPage> {
                     child: Image.network(productProvider.items[index].imageUrl),
                   ),
                   title: Text(productProvider.items[index].title),
-                  trailing: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          productProvider.deleteProductById(index);
-                        });
-                      },
-                      icon: const Icon(Icons.delete)),
+                  trailing: FittedBox(
+                    fit: BoxFit.fill,
+                    child: Row(children: [
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            productProvider
+                                .setPointer(productProvider.items[index].id);
+                            Navigator.pushNamed(context, "/edit");
+                          });
+                        },
+                        icon: const Icon(Icons.edit),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            setState(() {
+                              productProvider.deleteProductById(index);
+                            });
+                          },
+                          icon: const Icon(Icons.delete)),
+                    ]),
+                  ),
                 );
               },
             ),

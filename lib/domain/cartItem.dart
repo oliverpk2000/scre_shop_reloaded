@@ -1,15 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:scre_shop_reloaded/domain/product.dart';
 
 class CartItem with ChangeNotifier {
-  final String id;
-  final String title;
-  final int quantity;
-  final double price;
+  final Product product;
+  int amount;
 
   CartItem({
-    required this.id,
-    required this.title,
-    required this.quantity,
-    required this.price,
+    required this.product,
+    required this.amount,
   });
 }

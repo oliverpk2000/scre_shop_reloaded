@@ -1,4 +1,7 @@
+import 'dart:js_util';
+
 import 'package:flutter/material.dart';
+import 'package:scre_shop_reloaded/domain/cartItem.dart';
 
 import '../domain/product.dart';
 
@@ -68,6 +71,8 @@ class ProductProvider with ChangeNotifier {
 
   var onlyFavourites = false;
 
+  List<CartItem> cart = [];
+
   List<Product> get items {
     if (onlyFavourites) {
       return products.where((product) => product.isFavourite).toList();
@@ -94,7 +99,9 @@ class ProductProvider with ChangeNotifier {
   }
 
   void deleteProductById(int productId){
-    items.removeAt(productId);
+    Product product = items.firstWhere((element) => element.id == productId);
+    int removeIndex = items.indexOf(product);
+    items.removeAt(removeIndex);
     notifyListeners();
   }
 
@@ -104,6 +111,7 @@ class ProductProvider with ChangeNotifier {
 
   void addProduct(Product newProduct){
     items.add(newProduct);
+    notifyListeners();
     lastId++;
   }
 
@@ -113,5 +121,27 @@ class ProductProvider with ChangeNotifier {
 
   int getPointer(){
     return pointer;
+  }
+
+  void addCartItem(CartItem cartItem){
+    cart.add(cartItem);
+    notifyListeners();
+  }
+
+  void removeCartItemById(int cartItemId){
+    CartItem cartItem = cart.firstWhere((element) => element.product.id == cartItemId);
+    int removeIndex = cart.indexOf(cartItem);
+    items.removeAt(removeIndex);
+    notifyListeners();
+  }
+
+  void changeCartItemAmount(int id, int amount){
+    //cart.firstWhere((element) => element.product.id == id);
+  }
+
+  void changeProduct(Product newProduct) {
+    items[items.indexWhere((element) => element.id == newProduct.id)] = newProduct;
+    print(newProduct.title);
+    notifyListeners();
   }
 }
