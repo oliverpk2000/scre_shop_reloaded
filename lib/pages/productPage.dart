@@ -23,7 +23,10 @@ class _ProductPageState extends State<ProductPage> {
         actions: [
           IconButton(onPressed: (){
             Navigator.pushNamed(context, "/management");
-          }, icon: const Icon(Icons.edit))
+          }, icon: const Icon(Icons.edit)),
+          IconButton(onPressed: (){
+            Navigator.pushNamed(context, "/cart");
+          }, icon: const Icon(Icons.shopping_cart))
         ],
       ),
       body: Column(

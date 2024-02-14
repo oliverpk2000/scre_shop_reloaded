@@ -94,53 +94,63 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleFavouriteById(int productId){
+  void toggleFavouriteById(int productId) {
     products.firstWhere((p) => p.id == productId).toggleFavorite();
   }
 
-  void deleteProductById(int productId){
+  void deleteProductById(int productId) {
     Product product = items.firstWhere((element) => element.id == productId);
     int removeIndex = items.indexOf(product);
     items.removeAt(removeIndex);
     notifyListeners();
   }
 
-  int getLastId(){
+  int getLastId() {
     return lastId;
   }
 
-  void addProduct(Product newProduct){
+  void addProduct(Product newProduct) {
     items.add(newProduct);
     notifyListeners();
     lastId++;
   }
 
-  void setPointer(int p){
+  void setPointer(int p) {
     pointer = p;
   }
 
-  int getPointer(){
+  int getPointer() {
     return pointer;
   }
 
-  void addCartItem(CartItem cartItem){
+  void addCartItem(CartItem cartItem) {
     cart.add(cartItem);
+
     notifyListeners();
   }
 
-  void removeCartItemById(int cartItemId){
-    CartItem cartItem = cart.firstWhere((element) => element.product.id == cartItemId);
+  void removeCartItemById(int cartItemId) {
+    CartItem cartItem = cart.firstWhere((element) =>
+    element.product.id == cartItemId);
     int removeIndex = cart.indexOf(cartItem);
     items.removeAt(removeIndex);
     notifyListeners();
   }
 
-  void changeCartItemAmount(int id, int amount){
-    //cart.firstWhere((element) => element.product.id == id);
+  void incrementCartItem(CartItem cartItem) {
+    int index = cart.indexWhere((element) =>
+    element.product.id == cartItem.product.id);
+    if (index >= 0) {
+      cart[index].amount++;
+      notifyListeners();
+    }else{
+      addCartItem(cartItem);
+    }
   }
 
   void changeProduct(Product newProduct) {
-    items[items.indexWhere((element) => element.id == newProduct.id)] = newProduct;
+    items[items.indexWhere((element) => element.id == newProduct.id)] =
+        newProduct;
     print(newProduct.title);
     notifyListeners();
   }

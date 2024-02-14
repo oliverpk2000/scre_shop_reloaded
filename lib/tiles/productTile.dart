@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scre_shop_reloaded/domain/cartItem.dart';
 
 import '../domain/product.dart';
 import '../providers/productProvider.dart';
@@ -42,7 +43,7 @@ class _ProductTileState extends State<ProductTile> {
                     ? (Icons.favorite_outlined)
                     : (Icons.favorite_outline))),
             IconButton(onPressed: (){
-
+              productProvider.incrementCartItem(CartItem(product: widget.product, amount: 1));
             }, icon: const Icon(Icons.shopping_cart)),
           ],
         ),
