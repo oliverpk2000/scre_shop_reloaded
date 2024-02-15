@@ -22,12 +22,14 @@ class _DetailedProductPageState extends State<DetailedProductPage> {
         title: Text(product.title),
         backgroundColor: Colors.lightBlue,
       ),
-      body: Column(
-        children: [
-          Image.network(product.imageUrl),
-          Text(product.description),
-          Text("${product.price}€"),
-        ],
+      body: Center(
+        child: Column(
+          children: [
+            Image.network(product.imageUrl),
+            Text(product.description),
+            Text("${product.price}€"),
+          ],
+        ),
       ),
     );
   }
