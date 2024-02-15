@@ -25,42 +25,46 @@ class _ProductTileState extends State<ProductTile> {
         productProvider.setPointer(widget.product.id);
         Navigator.pushNamed(context, "/detail");
       },
-      child: GridTile(
-        header: GridTileBar(
-          title: Text(widget.product.title),
-          backgroundColor: Colors.lightBlue,
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: GridTile(
+          header: GridTileBar(
+            title: Text(widget.product.title),
+            backgroundColor: Colors.lightBlue,
+          ),
+          footer: Row(
+            children: [
+              Text("€${widget.product.price}"),
+              IconButton(
+                  onPressed: () {
+                    setState(() {
+                      productProvider.toggleFavouriteById(widget.product.id);
+                    });
+                    SnackBar snackBar = SnackBar(
+                        content: (widget.product.isFavourite)
+                            ? (Text(
+                                "added ${widget.product.title} to favourites"))
+                            : (Text(
+                                "removed ${widget.product.title} from favourites")));
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  },
+                  icon: Icon((widget.product.isFavourite)
+                      ? (Icons.favorite_outlined)
+                      : (Icons.favorite_outline))),
+              IconButton(
+                  onPressed: () {
+                    productProvider.incrementCartItem(
+                        CartItem(product: widget.product, amount: 1));
+                    SnackBar snackBar = SnackBar(
+                        content: Text("added ${widget.product.title} to cart"));
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  },
+                  icon: const Icon(Icons.shopping_cart)),
+            ],
+          ),
+          child: Image.network(widget.product.imageUrl),
         ),
-        footer: Row(
-          children: [
-            Text("€${widget.product.price}"),
-            IconButton(
-                onPressed: () {
-                  setState(() {
-                    productProvider.toggleFavouriteById(widget.product.id);
-                  });
-                  SnackBar snackBar = SnackBar(
-                      content: (widget.product.isFavourite)
-                          ? (Text(
-                              "added ${widget.product.title} to favourites"))
-                          : (Text(
-                              "removed ${widget.product.title} from favourites")));
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                },
-                icon: Icon((widget.product.isFavourite)
-                    ? (Icons.favorite_outlined)
-                    : (Icons.favorite_outline))),
-            IconButton(
-                onPressed: () {
-                  productProvider.incrementCartItem(
-                      CartItem(product: widget.product, amount: 1));
-                  SnackBar snackBar = SnackBar(
-                      content: Text("added ${widget.product.title} to cart"));
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                },
-                icon: const Icon(Icons.shopping_cart)),
-          ],
-        ),
-        child: Image.network(widget.product.imageUrl),
       ),
     );
   }

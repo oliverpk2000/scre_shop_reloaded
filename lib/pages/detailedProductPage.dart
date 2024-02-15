@@ -23,12 +23,16 @@ class _DetailedProductPageState extends State<DetailedProductPage> {
         backgroundColor: Colors.lightBlue,
       ),
       body: Center(
-        child: Column(
-          children: [
-            Image.network(product.imageUrl),
-            Text(product.description),
-            Text("${product.price}€"),
-          ],
+        child: Card(
+          elevation: 4,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: Column(
+            children: [
+              Image.network(product.imageUrl),
+              Text(product.description),
+              Text("${product.price}€"),
+            ],
+          ),
         ),
       ),
     );

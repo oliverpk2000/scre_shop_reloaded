@@ -29,7 +29,12 @@ class _OrderPageState extends State<OrderPage> {
               shrinkWrap: true,
               itemCount: productProvider.orders.length,
               itemBuilder: (context, index) {
-                return OrderItemTile(orderItem: productProvider.orders[index]);
+                return Card(
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    child: OrderItemTile(
+                        orderItem: productProvider.orders[index]));
               },
             ),
           )
